@@ -26,6 +26,9 @@ public class Empresa implements Serializable {
 	@OneToMany(mappedBy="empresa", targetEntity=Unidade.class, fetch=FetchType.LAZY)
 	private List<Unidade> unidades = new ArrayList<>();
 	
+	@OneToMany(mappedBy="empresa", targetEntity=Gerente.class, fetch=FetchType.LAZY)
+	private List<Gerente> gerentes = new ArrayList<>();
+	
 	private String descricao;
 	private String nome;
 	private String cnpj;
