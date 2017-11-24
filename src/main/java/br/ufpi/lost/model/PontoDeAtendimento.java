@@ -1,10 +1,11 @@
 package br.ufpi.lost.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,12 +29,16 @@ public class PontoDeAtendimento implements PersistenceEntity {
 	
 	private String nome;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private List<Fila> filas = new ArrayList<Fila>();
 	
 	@ManyToOne
 	@JoinColumn(name = "id_unidade")
 	private Unidade unidade;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_empresa")
+	private Empresa empresa;
 
 	public Unidade getUnidade() {
 		return unidade;
@@ -65,5 +70,13 @@ public class PontoDeAtendimento implements PersistenceEntity {
 
 	public void setFilas(List<Fila> filas) {
 		this.filas = filas;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 }

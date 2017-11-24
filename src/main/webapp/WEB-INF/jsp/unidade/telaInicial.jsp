@@ -56,7 +56,17 @@
       	<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
       		<a class="mdl-navigation__link" href="${linkTo[UnidadeController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Unidades</a>
       	
+      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Ponto de Atendimento</a>
+      	
+      		<a class="mdl-navigation__link" href="${linkTo[FilaController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Fila</a>
+      	
       		<a class="mdl-navigation__link" href="${linkTo[FuncionarioController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Funcionarios</a>
+      	
+      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Ponto a Unidade</a>
+      	
+      		<a class="mdl-navigation__link" href="${linkTo[FilaController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Fila a Ponto</a>
+      	
+      		<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Funcionario a Ponto</a>
       	</nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
@@ -72,7 +82,6 @@
       				<th class="mdl-data-table__cell--non-numeric">Nome da Unidade</th>
       				<th class="mdl-data-table__cell--non-numeric">Endereço</th>
       				<th class="mdl-data-table__cell--non-numeric">Descrição</th>
-      				<th class="mdl-data-table__cell--non-numeric">Pontos de Atendimento</th>
     			</tr>
   			</thead>
   			<tbody>
@@ -81,11 +90,6 @@
   						<td class="mdl-data-table__cell--non-numeric">${unidade.nome }</td>
   						<td class="mdl-data-table__cell--non-numeric">${unidade.endereco }</td>
   						<td class="mdl-data-table__cell--non-numeric">${unidade.descricao }</td>
-  						<td class="mdl-data-table__cell--non-numeric">
-  							<a href="${linkTo[PontoDeAtendimentoController].telaInicial(unidade.id)}">
-  								<i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">input</i>
-  							</a>
-  						</td>
   					</tr>
   				</c:forEach>
   			</tbody>

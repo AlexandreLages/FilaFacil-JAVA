@@ -18,11 +18,11 @@ public class EmpresaController {
 	@Inject private Result result;
 	@Inject private EmpresaDAO empresaDAO;
 	
-	@Public
+	@Permission
 	@Get("/empresa/adicionar")
 	public void adicionar() {}
 	
-	@Public
+	@Permission
 	@Post
 	public void adicionar(Empresa empresa, Usuario usuario) {
 		

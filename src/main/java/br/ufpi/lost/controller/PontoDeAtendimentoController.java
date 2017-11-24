@@ -24,33 +24,60 @@ public class PontoDeAtendimentoController {
 	@Inject private Result result;
 
 	@Permission
-	@Get("/ponto/{idUnidade}/listar")
-	public void telaInicial(long idUnidade) {
-		if(usuarioLogado.isLogado()) {
-			List<PontoDeAtendimento> pontosDeAtendimento = pontoDeAtendimentoDAO.listarPorUnidade(idUnidade);
-			Unidade unidade = unidadeDAO.findById(idUnidade);
+	@Get("/ponto/listar")
+	public void telaInicial() {
+	
+			List<PontoDeAtendimento> pontosDeAtendimento = pontoDeAtendimentoDAO.listarPorEmpresa(usuarioLogado.getUsuario().getEmpresa().getId());
 			
 			result.include("pontosDeAtendimento", pontosDeAtendimento);
-			result.include("idUnidade", idUnidade);
-			result.include("unidade", unidade);
-		}
 	}
 	
 	@Permission
-	@Get("/ponto/{idUnidade}/adicionar")
-	public void adicionar(long idUnidade) {
-		result.include("idUnidade", idUnidade);
+	@Get("/ponto/adicionar")
+	public void adicionar() {
 	}
 	
 	@Permission
 	@Post("/ponto/adicionar")
-	public void adicionar(PontoDeAtendimento ponto, long idUnidade) {
-		Unidade unidade = unidadeDAO.findById(idUnidade);
-		ponto.setUnidade(unidade);
+	public void adicionar(PontoDeAtendimento ponto) {
+		ponto.setEmpresa(usuarioLogado.getUsuario().getEmpresa());
 		
 		pontoDeAtendimentoDAO.save(ponto);
 		
 		result.include("mensagem", "Ponto de atendimento cadastrado com sucesso");
-		result.redirectTo(PontoDeAtendimentoController.class).telaInicial(idUnidade);
+		result.redirectTo(PontoDeAtendimentoController.class).telaInicial();
+	}
+	
+	
+	@Permission
+	@Get
+	public void associacoes() {
+		List<PontoDeAtendimento> listarPontosAssociados = pontoDeAtendimentoDAO.listarPontosAssociados(usuarioLogado.getUsuario().getEmpresa().getId());
+		
+		result.include("pontos", listarPontosAssociados);
+	}
+	
+	@Permission
+	@Get("/ponto/associar")
+	public void associar() {
+		List<Unidade> listarUnidades = unidadeDAO.listarPorEmpresa(usuarioLogado.getUsuario().getEmpresa().getId());
+		List<PontoDeAtendimento> listarPontosDesassociados = pontoDeAtendimentoDAO.listarPontosDesassociados(usuarioLogado.getUsuario().getEmpresa().getId());
+		
+		result.include("unidades", listarUnidades);
+		result.include("pontos", listarPontosDesassociados);
+	}
+	
+	@Permission
+	@Post("/ponto/associar")
+	public void associar(long idUnidade, long idPonto) {
+		Unidade unidade = unidadeDAO.findById(idUnidade);
+		PontoDeAtendimento ponto = pontoDeAtendimentoDAO.findById(idPonto);
+		
+		ponto.setUnidade(unidade);
+		
+		pontoDeAtendimentoDAO.save(ponto);
+		
+		result.include("mensagem", "Ponto atualizado com sucesso");
+		result.redirectTo(PontoDeAtendimentoController.class).associacoes();
 	}
 }

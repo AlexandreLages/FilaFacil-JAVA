@@ -38,7 +38,7 @@ public class FuncionarioController {
 			result.include("funcionarios", funcs);
 	}
 	
-	@Public
+	@Permission
 	@Post("/funcionario/adicionar")
 	public void adicionar(Usuario usuario) {
 		

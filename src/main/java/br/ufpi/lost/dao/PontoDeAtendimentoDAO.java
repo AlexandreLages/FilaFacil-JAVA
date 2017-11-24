@@ -17,6 +17,28 @@ public class PontoDeAtendimentoDAO extends GenericDAO<PontoDeAtendimento> {
 				.getResultList();
 		
 	}
+
+	public List<PontoDeAtendimento> listarPorEmpresa(Long id) {
+		return em.createQuery("select ponto from PontoDeAtendimento as ponto "
+				+ "where ponto.empresa.id = :id", PontoDeAtendimento.class)
+				.setParameter("id", id)
+				.getResultList();
+	}
+
+	public List<PontoDeAtendimento> listarPontosAssociados(Long id) {
+		return em.createQuery("select ponto from PontoDeAtendimento as ponto "
+				+ "where ponto.empresa.id = :id and ponto.unidade != null", PontoDeAtendimento.class)
+				.setParameter("id", id)
+				.getResultList();
+		
+	}
+
+	public List<PontoDeAtendimento> listarPontosDesassociados(Long id) {
+		return em.createQuery("select ponto from PontoDeAtendimento as ponto "
+				+ "where ponto.empresa.id = :id and ponto.unidade = null", PontoDeAtendimento.class)
+				.setParameter("id", id)
+				.getResultList();
+	}
 	
 	
 }

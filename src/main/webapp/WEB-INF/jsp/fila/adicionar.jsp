@@ -70,27 +70,14 @@
       	</nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-      	<form action="<c:url value="/funcionario/adicionar"/>" method="post">
+      	<form action="<c:url value="/fila/adicionar"/>" method="post">
       		<span class="mdl-chip">
-	    		<span class="mdl-chip__text">Adicionar Funcionario</span>
+	    		<span class="mdl-chip__text">Adicionar Fila</span>
 			</span>
 			<br>
 			<div class="mdl-textfield mdl-js-textfield">
-      			<input class="mdl-textfield__input" type="text" id="nomeGerente" name="usuario.nome"/>
-    			<label class="mdl-textfield__label" for="nomeGerente">Nome *</label>
-      		</div>
-      		<div class="mdl-textfield mdl-js-textfield">
-      			<input class="mdl-textfield__input" type="text" id="emailGerente" name="usuario.email"/>
-    			<label class="mdl-textfield__label" for="cnpjGerente">Email*</label>
-      		</div>
-      		<br>
-      		<div class="mdl-textfield mdl-js-textfield">
-      			<input class="mdl-textfield__input" type="text" id="loginGerente" name="usuario.login"/>
-    			<label class="mdl-textfield__label" for="loginGerente">Login*</label>
-      		</div>
-      		<div class="mdl-textfield mdl-js-textfield">
-      			<input class="mdl-textfield__input" type="password" id="passwordGerente" name="usuario.password"/>
-    			<label class="mdl-textfield__label" for="passwordGerente">Password*</label>
+      			<input class="mdl-textfield__input" type="text" id="nomeGerente" name="fila.descricao"/>
+    			<label class="mdl-textfield__label" for="nomeGerente">Descricao *</label>
       		</div>
       		<br>
 	      	<br>
