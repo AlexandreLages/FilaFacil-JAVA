@@ -1,0 +1,15 @@
+body {
+    text-align: center;
+}
+
+.mdl-chip {
+    align-items: center;
+    justify-content: center;
+    margin: 16px;
+}
+
+table {
+	margin: auto;
+    justify-content: center;
+    margin: 16px;
+}

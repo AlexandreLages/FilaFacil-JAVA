@@ -1,9 +1,9 @@
 package br.ufpi.lost.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import br.ufpi.lost.dao.PersistenceEntity;
+
 @Entity
-public class Empresa implements Serializable {
+public class Empresa implements PersistenceEntity {
 
 	/**
 	 * 
@@ -23,38 +25,22 @@ public class Empresa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(mappedBy="empresa", targetEntity=Unidade.class, fetch=FetchType.LAZY)
-	private List<Unidade> unidades = new ArrayList<>();
-	
-	@OneToMany(mappedBy="empresa", targetEntity=Gerente.class, fetch=FetchType.LAZY)
-	private List<Gerente> gerentes = new ArrayList<>();
-	
-	private String descricao;
 	private String nome;
 	private String cnpj;
+	private String descricao;
 	
-	public List<Unidade> getUnidades() {
-		return unidades;
-	}
-
-	public void setUnidades(List<Unidade> unidades) {
-		this.unidades = unidades;
-	}
-
+	@OneToMany(mappedBy="empresa", targetEntity=Usuario.class,fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	
+	@OneToMany(mappedBy="empresa", targetEntity=Unidade.class,fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Unidade> unidades = new ArrayList<Unidade>();
+	
 	public Long getId() {
 		return id;
 	}
 	
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	public String getDescricao() {
-		return descricao;
-	}
-	
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 	
 	public String getNome() {
@@ -71,5 +57,29 @@ public class Empresa implements Serializable {
 	
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public List<Unidade> getUnidades() {
+		return unidades;
+	}
+
+	public void setUnidades(List<Unidade> unidades) {
+		this.unidades = unidades;
 	}
 }

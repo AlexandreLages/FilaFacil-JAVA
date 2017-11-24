@@ -1,6 +1,8 @@
+/**
+ * 
+ */
 package br.ufpi.lost.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,72 +18,47 @@ import org.hibernate.criterion.Projections;
 
 import br.com.caelum.vraptor.ioc.Container;
 
-public abstract class GenericDAO<T extends Serializable> {
+public abstract class GenericDAO<T extends PersistenceEntity> {
 
-	/**
-	 * entityClass
-	 */
+	
 	private Class<T> entityClass;
-
-	/**
-	 * container
-	 */
 	protected Container container;
 	
 	@Inject /* Injected by vraptor-jpa using the persistence-unit = default */
 	protected EntityManager em; 
 
-	/**
-	 * Default constructor 
-	 * @param entityClass
-	 */
+	
 	public GenericDAO(Class<T> entityClass) {
 		this.entityClass = entityClass;
 	}
 
-	/**
-	 * Get Container
-	 * @return container
-	 */
+	
 	public Container getContainer() {
 		return container;
 	}
 
-	/**
-	 * Set container
-	 * @param container
-	 */
+	
 	public void setContainer(Container container) {
 		this.container = container;
 	}
 	
-	/**
-	 * Set Entity Manager
-	 * @param em
-	 */
+	
 	public void setEntityManager(EntityManager em) {
 		this.em = em;
 	}
 
-	/**
-	 * Adds or updates an entity and returns after operation
-	 * 
-	 * @param entity
-	 * @return entity
-	 * @throws Exception
-	 */
+	
 	public T save(T entity) {
+		
+		if (entity.getId() != null && entity.getId() == 0) {
+			entity.setId(null);
+		}
+
 		entity = em.merge(entity);
 		return entity;
 	}
 
-	/**
-	 * Deletes an entity by id
-	 * 
-	 * @param entityId
-	 * @return true or false
-	 * @throws Exception
-	 */
+	
 	public boolean delete(Long entityId) {
 		Query query = em.createQuery("Delete from " + entityClass.getSimpleName() + " en where en.id = :id");
 		query.setParameter("id", entityId);
@@ -92,12 +69,7 @@ public abstract class GenericDAO<T extends Serializable> {
 		return deleted;
 	}
 
-	/**
-	 * Remove
-	 * 
-	 * @param object
-	 * 
-	 */
+	
 	public final void delete(T object) {
 		em.remove(object);
 	}

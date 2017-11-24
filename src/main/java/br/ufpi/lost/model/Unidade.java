@@ -1,9 +1,9 @@
 package br.ufpi.lost.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,45 +13,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import br.ufpi.lost.dao.PersistenceEntity;
+
 @Entity
-public class Unidade implements Serializable {
+public class Unidade implements PersistenceEntity {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_empresa")
-	private Empresa empresa;
-	
-	@OneToMany(mappedBy="unidade", targetEntity=PontoDeAtendimento.class, fetch=FetchType.LAZY)
-	private List<PontoDeAtendimento> pontosDeAtendimento = new ArrayList<>();
 	
 	private String nome;
 	private String descricao;
 	private String endereco;
 	
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-
-	public List<PontoDeAtendimento> getPontosDeAtendimento() {
-		return pontosDeAtendimento;
-	}
-
-	public void setPontosDeAtendimento(List<PontoDeAtendimento> pontosDeAtendimento) {
-		this.pontosDeAtendimento = pontosDeAtendimento;
-	}
-
+	@ManyToOne
+	@JoinColumn(name = "id_empresa")
+	private Empresa empresa;
+	
+	@OneToMany(mappedBy="unidade", targetEntity=PontoDeAtendimento.class,fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<PontoDeAtendimento> pontosDeAtendimento = new ArrayList<PontoDeAtendimento>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -82,5 +68,21 @@ public class Unidade implements Serializable {
 	
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
-	}	
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public List<PontoDeAtendimento> getPontosDeAtendimento() {
+		return pontosDeAtendimento;
+	}
+
+	public void setPontosDeAtendimento(List<PontoDeAtendimento> pontosDeAtendimento) {
+		this.pontosDeAtendimento = pontosDeAtendimento;
+	}
 }

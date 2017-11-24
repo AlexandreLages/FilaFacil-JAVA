@@ -1,16 +1,16 @@
 package br.ufpi.lost.model;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import br.ufpi.lost.dao.PersistenceEntity;
 
 @Entity
-public class Usuario implements Serializable {
+public class Usuario implements PersistenceEntity {
 
 	/**
 	 * 
@@ -27,8 +27,9 @@ public class Usuario implements Serializable {
 	private String email;
 	private String imagem;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Permissao permissao;
+	@ManyToOne
+	@JoinColumn(name = "id_empresa")
+	private Empresa empresa;
 	
 	public Long getId() {
 		return id;
@@ -78,11 +79,11 @@ public class Usuario implements Serializable {
 		this.imagem = imagem;
 	}
 
-	public Permissao getPermissao() {
-		return permissao;
+	public Empresa getEmpresa() {
+		return empresa;
 	}
 
-	public void setPermissao(Permissao permissao) {
-		this.permissao = permissao;
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 }
