@@ -67,7 +67,8 @@
       		<a class="mdl-navigation__link" href="${linkTo[FilaController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Fila a Ponto</a>
       	
       		<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Funcionario a Ponto</a>
-      	</nav>      </div>
+      	</nav>
+      </div>
       <main class="mdl-layout__content mdl-color--grey-100">
       	<c:if test="${mensagem != null }">
       	<span class="mdl-chip">
@@ -78,20 +79,24 @@
 		<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin:auto;" width="70%">
 			<thead>
     			<tr>
-      				<th class="mdl-data-table__cell--non-numeric">Descricao </th>
+      				<th class="mdl-data-table__cell--non-numeric">Painel</th>
+      				<th class="mdl-data-table__cell--non-numeric">Ponto de Atendimento</th>
     			</tr>
   			</thead>
   			<tbody>
-  				<c:forEach items="${filas}" var="fila" varStatus="status">
-  					<tr>
-  						<td class="mdl-data-table__cell--non-numeric">${fila.descricao}</td>
-  					</tr>
+  				<c:forEach items="${paineis}" var="painel" varStatus="status">
+  					<c:forEach items="${painel.pontos}" var="ponto" varStatus="status">
+	  					<tr>
+	  						<td class="mdl-data-table__cell--non-numeric">${painel.nome }</td>
+	  						<td class="mdl-data-table__cell--non-numeric">${ponto.nome }</td>
+	  					</tr>
+  					</c:forEach>
   				</c:forEach>
   			</tbody>
 		</table>
       </main>
     </div>
-    <a href="${linkTo[FilaController].adicionar}" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Adicionar Unidade</a>
+    <a href="${linkTo[PainelController].associar}" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Associar</a>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   </body>
 </html>

@@ -75,23 +75,27 @@
 		</span>	
 		</c:if>
 		<br>
-		<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin:auto;" width="70%">
-			<thead>
-    			<tr>
-      				<th class="mdl-data-table__cell--non-numeric">Descricao </th>
-    			</tr>
-  			</thead>
-  			<tbody>
-  				<c:forEach items="${filas}" var="fila" varStatus="status">
-  					<tr>
-  						<td class="mdl-data-table__cell--non-numeric">${fila.descricao}</td>
-  					</tr>
-  				</c:forEach>
-  			</tbody>
-		</table>
+		
+		<form action="<c:url value="/painel/associar"/>" method="post">
+			<select name="idPainel">
+				<c:forEach var="painel" items="${paineis}">
+					<option id="${painel}" value="${painel.id}">${painel.nome}</option>
+				</c:forEach>
+			</select>
+			
+			
+			<c:forEach var="ponto" items="${pontos}" varStatus="count">	
+				<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="${ponto}">
+ 					<input type="checkbox" id="${ponto}" class="mdl-checkbox__input"  name="pontoDeAtendimentos[${count.index}]" value="${ponto.id}">
+ 					<span class="mdl-checkbox__label">${ponto.nome}</span>
+ 				</label>
+			</c:forEach>
+			
+			<button type="submit">Associar</button>
+		</form>
+		
       </main>
     </div>
-    <a href="${linkTo[FilaController].adicionar}" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Adicionar Unidade</a>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   </body>
 </html>

@@ -10,7 +10,11 @@ public class EmpresaDAO extends GenericDAO<Empresa>{
 	public EmpresaDAO(){
 		super(Empresa.class);
 	}
-
+	/**
+	 * Recebe o id da empresa e lista os funcionarios.
+	 * @param id
+	 * @return
+	 */
 	public List<Usuario> listarFuncionariosPorEmpresa(Long id) {
 		return em.createQuery("select usuario from Usuario as usuario "
 				+ "where usuario.empresa.id = :id", Usuario.class)

@@ -11,7 +11,12 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
 		super(Usuario.class);
 	}
 	
-	
+	/**
+	 * Busca a combinacao de login e senha para que o login seja validado.
+	 * @param login
+	 * @param senha
+	 * @return
+	 */
 	public Usuario buscarPorLoginESenha(String login, String senha) {
 		try{
 			return em.createQuery("select usuario from Usuario as usuario where usuario.login = :login "

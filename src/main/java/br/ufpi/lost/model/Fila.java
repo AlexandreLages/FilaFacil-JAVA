@@ -39,43 +39,71 @@ public class Fila implements PersistenceEntity {
 	
 	@OneToMany(mappedBy="fila", targetEntity=Cliente.class,fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Cliente> clientes = new ArrayList<>();
-
+	/**
+	 * Retorna o id da fila.
+	 */
 	public Long getId() {
 		return id;
 	}
-
+	/**
+	 * Seta o id da fila..
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	/**
+	 * Retorna os pontos de atendimento da fila.
+	 * @return
+	 */
 	public List<PontoDeAtendimento> getPontosDeAtendimento() {
 		return pontosDeAtendimento;
 	}
-
+	/**
+	 * Seta os pontos de atendimento da fila.
+	 * @param pontosDeAtendimento
+	 */
 	public void setPontosDeAtendimento(List<PontoDeAtendimento> pontosDeAtendimento) {
 		this.pontosDeAtendimento = pontosDeAtendimento;
 	}
-
+	/**
+	 * Retorna a descricao da fila.
+	 * @return
+	 */
 	public String getDescricao() {
 		return descricao;
 	}
-
+	/**
+	 * Seta a descricao da fila.
+	 * @param descricao
+	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	/**
+	 * Retorna a empresa da fila.
+	 * @return
+	 */
 	public Empresa getEmpresa() {
 		return empresa;
 	}
-
+	/**
+	 * Seta a empresa da fila.
+	 * @param empresa
+	 */
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-
+	/**
+	 * Retorna os clientes da fila.
+	 * @return
+	 */
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
-
+	/**
+	 * Seta os cliente da fila.
+	 * @param clientes
+	 */
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}

@@ -36,47 +36,94 @@ public class PontoDeAtendimento implements PersistenceEntity {
 	@JoinColumn(name = "id_unidade")
 	private Unidade unidade;
 	
+	@ManyToMany(mappedBy="pontos")
+	private List<Painel> paineis = new ArrayList<Painel>();
+	
 	@ManyToOne
 	@JoinColumn(name = "id_empresa")
 	private Empresa empresa;
 
-	public Unidade getUnidade() {
-		return unidade;
-	}
-
-	public void setUnidade(Unidade unidade) {
-		this.unidade = unidade;
-	}
-
+	/**
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * @param nome the nome to set
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * @return the filas
+	 */
 	public List<Fila> getFilas() {
 		return filas;
 	}
 
+	/**
+	 * @param filas the filas to set
+	 */
 	public void setFilas(List<Fila> filas) {
 		this.filas = filas;
 	}
 
+	/**
+	 * @return the unidade
+	 */
+	public Unidade getUnidade() {
+		return unidade;
+	}
+
+	/**
+	 * @param unidade the unidade to set
+	 */
+	public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
+	}
+
+	/**
+	 * @return the empresa
+	 */
 	public Empresa getEmpresa() {
 		return empresa;
 	}
 
+	/**
+	 * @param empresa the empresa to set
+	 */
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+
+	/**
+	 * @return the paineis
+	 */
+	public List<Painel> getPaineis() {
+		return paineis;
+	}
+
+	/**
+	 * @param paineis the paineis to set
+	 */
+	public void setPaineis(List<Painel> paineis) {
+		this.paineis = paineis;
 	}
 }

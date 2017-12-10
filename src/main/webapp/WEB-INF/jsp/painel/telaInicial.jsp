@@ -82,16 +82,16 @@
     			</tr>
   			</thead>
   			<tbody>
-  				<c:forEach items="${filas}" var="fila" varStatus="status">
+  				<c:forEach items="${paineis}" var="painel" varStatus="status">
   					<tr>
-  						<td class="mdl-data-table__cell--non-numeric">${fila.descricao}</td>
+  						<td class="mdl-data-table__cell--non-numeric">${painel.descricao}</td>
   					</tr>
   				</c:forEach>
   			</tbody>
 		</table>
       </main>
     </div>
-    <a href="${linkTo[FilaController].adicionar}" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Adicionar Unidade</a>
+    <a href="${linkTo[PainelController].adicionar}" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Adicionar Painel</a>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   </body>
 </html>

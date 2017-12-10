@@ -20,22 +20,37 @@ public class UsuarioLogado implements Serializable {
 		this.usuario = usuario;
 	}
 	
-	public String getNome(){
-		return usuario.getNome();
-	}
-	
+	/**
+	 * Varifica se usuario esta logado
+	 * @return
+	 */
 	public boolean isLogado(){
 		return usuario != null;
 	}
-	
+	/**
+	 * Realiza o logout do usuario
+	 */
 	public void logout(){
 		this.usuario = null;
 	}
-	
+	/**
+	 * Retorna o nome do usuario.
+	 * @return
+	 */
+	public String getNome(){
+		return usuario.getNome();
+	}
+	/**
+	 * Retorna email do usuario
+	 * @return
+	 */
 	public String getEmail(){
 		return usuario.getEmail();
 	}
-
+	/**
+	 * Retorna objeto usuario.
+	 * @return
+	 */
 	public Usuario getUsuario() {
 		return usuario;
 	}

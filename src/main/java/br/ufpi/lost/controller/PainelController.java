@@ -9,51 +9,49 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.ufpi.lost.annotation.Permission;
-import br.ufpi.lost.dao.FilaDAO;
+import br.ufpi.lost.dao.PainelDAO;
 import br.ufpi.lost.dao.PontoDeAtendimentoDAO;
 import br.ufpi.lost.model.Empresa;
-import br.ufpi.lost.model.Fila;
+import br.ufpi.lost.model.Painel;
 import br.ufpi.lost.model.PontoDeAtendimento;
 import br.ufpi.lost.model.UsuarioLogado;
 
 @Controller
-public class FilaController {
+public class PainelController {
 	
 	@Inject private UsuarioLogado usuarioLogado;
 	@Inject private Result result;
-	@Inject private FilaDAO dao;
+	@Inject private PainelDAO dao;
 	@Inject private PontoDeAtendimentoDAO pontoDeAtendimentoDAO;
-	
+
 	@Permission
-	@Get("/fila/telaInicial")
+	@Get("/painel/telaInicial")
 	/**
-	 * Carrega a tela inicial
+	 * Carrega tela do painel de atendimento
 	 */
 	public void telaInicial() {
 		Empresa empresa = usuarioLogado.getUsuario().getEmpresa();
-		List<Fila> filas = dao.listarFilasPorEmpresa(empresa.getId());
-		result.include("filas", filas);
+		List<Painel> paineis = dao.listarPaineisPorEmpresa(empresa.getId());
+		result.include("paineis", paineis);
 	}
 	
 	@Permission
 	@Get
-	public void adicionar() {
-		
-	}
+	public void adicionar() {}
 	
 	@Permission
-	@Post("/fila/adicionar")
+	@Post("/painel/adicionar")
 	/**
-	 * Adicionar fila a empresa. O metodo recebe a fila como parametro.
+	 * Adicionar painel a empresa. O metodo recebe o painel como parametro.
 	 * @param fila
 	 */
-	public void adicionar(Fila fila) {
+	public void adicionar(Painel painel) {
 		
-		fila.setEmpresa(usuarioLogado.getUsuario().getEmpresa());
+		painel.setEmpresa(usuarioLogado.getUsuario().getEmpresa());
 
-		dao.save(fila);
+		dao.save(painel);
 		
-		result.include("mensagem", "Fila adicionada com sucesso");
+		result.include("mensagem", "Painel adicionado com sucesso");
 		result.redirectTo(this).telaInicial();
 	}
 	
@@ -63,9 +61,9 @@ public class FilaController {
 	 * Metodo lista as filas por empresas.
 	 */
 	public void associacoes() {
-		List<Fila> filas = dao.listarFilasPorEmpresa(usuarioLogado.getUsuario().getEmpresa().getId());
+		List<Painel> paineis = dao.listarPaineisPorEmpresa(usuarioLogado.getUsuario().getEmpresa().getId());
 		
-		result.include("filas", filas);
+		result.include("paineis", paineis);
 	}
 	
 	@Permission
@@ -74,33 +72,29 @@ public class FilaController {
 	 * Carrega as filas e os pontos de atendimento
 	 */
 	public void associar() {
-		List<Fila> filas = dao.listarFilasPorEmpresa(usuarioLogado.getUsuario().getEmpresa().getId());
+		List<Painel> paineis = dao.listarPaineisPorEmpresa(usuarioLogado.getUsuario().getEmpresa().getId());
 		List<PontoDeAtendimento> listarPorEmpresa = pontoDeAtendimentoDAO.listarPorEmpresa(usuarioLogado.getUsuario().getEmpresa().getId());
 		
 		result.include("pontos", listarPorEmpresa);
-		result.include("filas", filas);
+		result.include("paineis", paineis);
 	}
 	
 	@Permission
 	@Post
 	/**
-	 * Metodo associa a uma fila a variso pontos de atendimento. O metodo recebe a fila a ser adicionada e a lista de pontos de atendimento
+	 * Metodo associa a uma fila a varios pontos de atendimento. O metodo recebe a fila a ser adicionada e a lista de pontos de atendimento
 	 * @param idFila
 	 * @param pontoDeAtendimentos
 	 */
-	public void associar(long idFila, List<Long> pontoDeAtendimentos) {
-		Fila findById = dao.findById(idFila);
+	public void associar(long idPainel, List<Long> pontoDeAtendimentos) {
+		Painel findById = dao.findById(idPainel);
 		
 		for (Long ponto : pontoDeAtendimentos) {
-			
 			PontoDeAtendimento pontoDeAtendimento = pontoDeAtendimentoDAO.findById(ponto);
-			pontoDeAtendimento.getFilas().add(findById);
+			pontoDeAtendimento.getPaineis().add(findById);
 			
 			pontoDeAtendimentoDAO.save(pontoDeAtendimento);
-		}
+		}	
 		result.redirectTo(this).associacoes();
 	}
-	
-	
-
 }

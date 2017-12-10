@@ -36,7 +36,7 @@
   	<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">${usuarioLogado.usuario.empresa.nome } - Unidades Da Empresa</span>
+          <span class="mdl-layout-title">${usuarioLogado.usuario.empresa.nome }</span>
           <div class="mdl-layout-spacer"></div>
           <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
             <i class="material-icons">more_vert</i>
@@ -49,7 +49,7 @@
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
       	<header class="demo-drawer-header">
       		<div class="demo-avatar-dropdown">
-      			<span>${usuarioLogado.usuario.nome} - ${usuarioLogado.usuario.empresa.nome}</span>
+      			<span>${usuarioLogado.usuario.nome}</span>
       			<div class="mdl-layout-spacer"></div>
       		</div>
       	</header>
@@ -67,31 +67,29 @@
       		<a class="mdl-navigation__link" href="${linkTo[FilaController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Fila a Ponto</a>
       	
       		<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Funcionario a Ponto</a>
-      	</nav>      </div>
+      	</nav>
+      </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-      	<c:if test="${mensagem != null }">
-      	<span class="mdl-chip">
-    		<span class="mdl-chip__text">${mensagem}</span>
-		</span>	
-		</c:if>
-		<br>
-		<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin:auto;" width="70%">
-			<thead>
-    			<tr>
-      				<th class="mdl-data-table__cell--non-numeric">Descricao </th>
-    			</tr>
-  			</thead>
-  			<tbody>
-  				<c:forEach items="${filas}" var="fila" varStatus="status">
-  					<tr>
-  						<td class="mdl-data-table__cell--non-numeric">${fila.descricao}</td>
-  					</tr>
-  				</c:forEach>
-  			</tbody>
-		</table>
+      	<form action="<c:url value="/painel/adicionar"/>" method="post">
+      		<span class="mdl-chip">
+	    		<span class="mdl-chip__text">Adicionar Painel</span>
+			</span>
+			<br>
+			<div class="mdl-textfield mdl-js-textfield">
+	      		<input class="mdl-textfield__input" type="text" id="nomePainel" name="painel.nome"/>
+	    		<label class="mdl-textfield__label" for="nomePainel">Nome do painel*</label>
+	      	</div>
+	      	<div class="mdl-textfield mdl-js-textfield">
+      			<input class="mdl-textfield__input" type="text" id="descricaoPainel" name="painel.descricao"/>
+    			<label class="mdl-textfield__label" for="descricaoPainel">Descricao *</label>
+      		</div>
+	      	<br>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color-text--white">
+	  			Adicionar
+	  		</button>
+      	</form>
       </main>
     </div>
-    <a href="${linkTo[FilaController].adicionar}" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Adicionar Unidade</a>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   </body>
 </html>

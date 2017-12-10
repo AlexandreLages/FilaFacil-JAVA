@@ -23,6 +23,9 @@ public class UnidadeController {
 	
 	@Permission
 	@Get
+	/**
+	 * Mostra as unidades.
+	 */
 	public void telaInicial() {
 			Empresa empresa = usuarioLogado.getUsuario().getEmpresa();
 			List<Unidade> unidades = unidadeDAO.listarPorEmpresa(empresa.getId());
@@ -35,6 +38,10 @@ public class UnidadeController {
 	
 	@Permission
 	@Post
+	/**
+	 * Realiza operacao de adicao de unidade e volta para a tela inicial. Recebe a unidade como parametro.
+	 * @param unidade
+	 */
 	public void adicionar(Unidade unidade) {
 		if(usuarioLogado.isLogado()) {
 			Empresa empresa = usuarioLogado.getUsuario().getEmpresa();

@@ -32,6 +32,9 @@ public class FuncionarioController {
 	
 	@Permission
 	@Get
+	/**
+	 * Carrega a tela inicial.
+	 */
 	public void telaInicial() {
 			Empresa empresa = usuarioLogado.getUsuario().getEmpresa();
 			List<Usuario> funcs = dao.listarFuncionariosPorEmpresa(empresa.getId());
@@ -40,13 +43,17 @@ public class FuncionarioController {
 	
 	@Permission
 	@Post("/funcionario/adicionar")
+	/**
+	 * Adiciona usuario. O metodo recebe o usuario como parametro.
+	 * @param usuario
+	 */
 	public void adicionar(Usuario usuario) {
 		
 		usuario.setEmpresa(usuarioLogado.getUsuario().getEmpresa());
 		
 		usuarioDAO.save(usuario);
 		
-		result.include("mensagem", "Empresa adicionada com sucesso");
+		result.include("mensagem", "Usuario adicionada com sucesso");
 		result.redirectTo(this).telaInicial();
 	}
 

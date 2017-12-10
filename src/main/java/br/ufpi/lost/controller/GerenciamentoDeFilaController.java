@@ -32,6 +32,10 @@ public class GerenciamentoDeFilaController {
 	
 	@Permission
 	@Get("/ponto/{idPonto}/dashboard")
+	/**
+	 * Mostra as informacoes sobre um ponto de atendimento. O metodo recebe o ponto como parametro
+	 * @param idPonto
+	 */
 	public void dashboard(long idPonto) {
 		PontoDeAtendimento ponto = pontoDeAtendimentoDAO.findById(idPonto);
 		List<Cliente> clientesAtendidos = new ArrayList<>();
@@ -63,6 +67,13 @@ public class GerenciamentoDeFilaController {
 	
 	@Permission
 	@Post("/adicionar/cliente")
+	/**
+	 * O metodo adiciona o cliente a fila. Define o horario de entrada do cliente adicionado. Recebe o cliente, a fila 
+	 * e o ponto de atendimento como parametro.
+	 * @param cliente
+	 * @param idFila
+	 * @param idPonto
+	 */
 	public void adicionar(Cliente cliente, long idFila, long idPonto) {
 		Date horarioDeEntrada = new Date();
 		Fila fila = filaDAO.findById(idFila);
@@ -77,6 +88,10 @@ public class GerenciamentoDeFilaController {
 	
 	@Permission
 	@Post("/atender/cliente")
+	/**
+	 * Realiza um atendimento em um ponto. Recebe o ponto como parametro.
+	 * @param idPonto
+	 */
 	public void atender(long idPonto) {
 		PontoDeAtendimento ponto = pontoDeAtendimentoDAO.findById(idPonto);
 		List<Cliente> clientes = new ArrayList<>();

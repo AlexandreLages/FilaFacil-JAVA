@@ -25,6 +25,11 @@ public class LoginController {
 	
 	@Public
 	@Post
+	/**
+	 * Realiza login se os parametros de login e password estiverem corretos.
+	 * @param login
+	 * @param password
+	 */
 	public void login(String login, String password) {
 		
 		Usuario usuario = usuarioDAO.buscarPorLoginESenha(login, password);
@@ -39,6 +44,9 @@ public class LoginController {
 	
 	@Public
 	@Path("/usuario/logout")
+	/**
+	 * Encerra a sessao e volta para a pagina de login.
+	 */
 	public void logout() {
 		usuarioLogado.logout();
 		result.redirectTo(LoginController.class).login();

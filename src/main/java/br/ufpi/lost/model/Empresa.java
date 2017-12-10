@@ -34,51 +34,85 @@ public class Empresa implements PersistenceEntity {
 	
 	@OneToMany(mappedBy="empresa", targetEntity=Unidade.class,fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Unidade> unidades = new ArrayList<Unidade>();
-	
+	/**
+	 * Retorna o id da empresa.
+	 */
 	public Long getId() {
 		return id;
 	}
-	
+	/**
+	 * Seta o id da empresa.
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+	/**
+	 * Retorna o nome da empresa.
+	 * @return
+	 */
 	public String getNome() {
 		return nome;
 	}
-	
+	/**
+	 * Seta o nome da empresa.
+	 * @param nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+	/**
+	 * Retorna o Cnpj da empresa.
+	 * @return
+	 */
 	public String getCnpj() {
 		return cnpj;
 	}
-	
+	/** 
+	 * Seta o Cnpj da empresa.
+	 * @param cnpj
+	 */
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	
+	/**
+	 * Retorna as descricao da empresa.
+	 * @return
+	 */
 	public String getDescricao() {
 		return descricao;
 	}
-	
+	/**
+	 * Seta a descricao da empresa.
+	 * @param descricao
+	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	/**
+	 * Retorna os usuarios da empresa.
+	 * @return
+	 */
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
-
+	/**
+	 * Seta os usuarios da empresa.
+	 * @param usuarios
+	 */
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-
+	/**
+	 * Retorna as unidades da empresa.
+	 * @return
+	 */
 	public List<Unidade> getUnidades() {
 		return unidades;
 	}
-
+	/**
+	 * Seta as unidades da empresa.
+	 * @param unidades
+	 */
 	public void setUnidades(List<Unidade> unidades) {
 		this.unidades = unidades;
 	}

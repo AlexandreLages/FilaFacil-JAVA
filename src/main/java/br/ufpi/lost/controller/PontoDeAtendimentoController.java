@@ -25,6 +25,9 @@ public class PontoDeAtendimentoController {
 
 	@Permission
 	@Get("/ponto/listar")
+	/**
+	 * Mostra a tela inicial listando os pontos de atendimento.
+	 */
 	public void telaInicial() {
 	
 			List<PontoDeAtendimento> pontosDeAtendimento = pontoDeAtendimentoDAO.listarPorEmpresa(usuarioLogado.getUsuario().getEmpresa().getId());
@@ -34,11 +37,18 @@ public class PontoDeAtendimentoController {
 	
 	@Permission
 	@Get("/ponto/adicionar")
+	/**
+	 * Adicionar ponto de atendimento.
+	 */
 	public void adicionar() {
 	}
 	
 	@Permission
 	@Post("/ponto/adicionar")
+	/** 
+	 * Adiciona ponto de atendimento. Recebe o ponto como parametro.
+	 * @param ponto
+	 */
 	public void adicionar(PontoDeAtendimento ponto) {
 		ponto.setEmpresa(usuarioLogado.getUsuario().getEmpresa());
 		
@@ -51,6 +61,9 @@ public class PontoDeAtendimentoController {
 	
 	@Permission
 	@Get
+	/**
+	 * Lista os pontos de atentdimento para fazer associacoes.
+	 */
 	public void associacoes() {
 		List<PontoDeAtendimento> listarPontosAssociados = pontoDeAtendimentoDAO.listarPontosAssociados(usuarioLogado.getUsuario().getEmpresa().getId());
 		
@@ -59,6 +72,9 @@ public class PontoDeAtendimentoController {
 	
 	@Permission
 	@Get("/ponto/associar")
+	/**
+	 * Lista as unidades e os pontos de atendimento para fazer associacoes.
+	 */
 	public void associar() {
 		List<Unidade> listarUnidades = unidadeDAO.listarPorEmpresa(usuarioLogado.getUsuario().getEmpresa().getId());
 		List<PontoDeAtendimento> listarPontosDesassociados = pontoDeAtendimentoDAO.listarPontosDesassociados(usuarioLogado.getUsuario().getEmpresa().getId());
@@ -69,6 +85,11 @@ public class PontoDeAtendimentoController {
 	
 	@Permission
 	@Post("/ponto/associar")
+	/**
+	 * Realiza associacao. Recebe a unidade e o ponto como paramatro.
+	 * @param idUnidade
+	 * @param idPonto
+	 */
 	public void associar(long idUnidade, long idPonto) {
 		Unidade unidade = unidadeDAO.findById(idUnidade);
 		PontoDeAtendimento ponto = pontoDeAtendimentoDAO.findById(idPonto);

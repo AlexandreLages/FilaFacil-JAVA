@@ -58,7 +58,11 @@ public abstract class GenericDAO<T extends PersistenceEntity> {
 		return entity;
 	}
 
-	
+	/**
+	 * Deleta entidade pelo id.
+	 * @param entityId
+	 * @return
+	 */
 	public boolean delete(Long entityId) {
 		Query query = em.createQuery("Delete from " + entityClass.getSimpleName() + " en where en.id = :id");
 		query.setParameter("id", entityId);
@@ -69,7 +73,10 @@ public abstract class GenericDAO<T extends PersistenceEntity> {
 		return deleted;
 	}
 
-	
+	/**
+	 * Deleta objeto no EntityManager em.
+	 * @param object
+	 */
 	public final void delete(T object) {
 		em.remove(object);
 	}
