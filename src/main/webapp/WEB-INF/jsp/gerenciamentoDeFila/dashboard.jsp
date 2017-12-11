@@ -58,20 +58,20 @@
       		</div>
       	</header>
       	<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-      		<a class="mdl-navigation__link" href="${linkTo[UnidadeController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Unidades</a>
+      		<a class="mdl-navigation__link" href="${linkTo[UnidadeController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">business</i>Unidades</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Ponto de Atendimento</a>
+      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">location_on</i>Pontos de Atendimento</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[FilaController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Fila</a>
+      		<a class="mdl-navigation__link" href="${linkTo[FilaController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">linear_scale</i>Filas</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[FuncionarioController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Funcionarios</a>
+      		<a class="mdl-navigation__link" href="${linkTo[FuncionarioController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Funcionarios</a>
+      		      	
+      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings_ethernet</i>Associar Ponto a Unidade</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Ponto a Unidade</a>
+      		<a class="mdl-navigation__link" href="${linkTo[FilaController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings_ethernet</i>Associar Fila a Ponto</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[FilaController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Fila a Ponto</a>
-      	
-      		<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Funcionario a Ponto</a>
-      	</nav>
+      		
+      		<a class="mdl-navigation__link" href="${linkTo[EmpresaController].telaConfiguracao}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">brightness_high</i>Configurações</a></nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
       	<c:if test="${mensagem != null }">
@@ -80,7 +80,6 @@
 		</span>	
 		</c:if>
 		<br>
-		
 		<div class="row">
 			<div class="col-md-6">
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Adicionar Cliente</button>
@@ -94,6 +93,41 @@
 		
 		</div>
 		<div class="row">
+		<span class="mdl-chip">
+    		<span class="mdl-chip__text">Próximo a ser atendido</span>
+		</span>	
+		<br>
+				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin:auto;" width="80%">
+					<thead>
+    					<tr>
+      						<th class="mdl-data-table__cell--non-numeric">Cliente</th>
+      						<th class="mdl-data-table__cell--non-numeric">CPF</th>
+      						<th class="mdl-data-table__cell--non-numeric">Fila</th>
+      						<th class="mdl-data-table__cell--non-numeric">Prioridade</th>
+      						<th>Horário de entrada</th>
+    					</tr>
+  					</thead>
+  					<tbody>
+  						<c:forEach items="${proximo}" var="cliente" varStatus="status">
+  						<tr>
+  							<td class="mdl-data-table__cell--non-numeric">${cliente.nome }</td>
+  							<td class="mdl-data-table__cell--non-numeric">${cliente.cpf }</td>
+  							<td class="mdl-data-table__cell--non-numeric">${cliente.fila.descricao }</td>
+  							<c:if test="${cliente.fila.prioritario == true }">
+  							<td class="mdl-data-table__cell--non-numeric">Sim</td>
+  							</c:if>
+  							<c:if test="${cliente.fila.prioritario == false}">
+  							<td class="mdl-data-table__cell--non-numeric">Não</td>
+  							</c:if>
+  							<td>${cliente.horarioDeEntrada.hours}:${cliente.horarioDeEntrada.minutes}:${cliente.horarioDeEntrada.seconds}</td>
+  						</tr>
+  						</c:forEach>
+  					</tbody>
+				</table>
+		</div>
+		
+		
+		<div class="row">
 			<div class="col-md-6">
 				<span class="mdl-chip">
     		<span class="mdl-chip__text">Fila de Espera</span>
@@ -105,6 +139,7 @@
       						<th class="mdl-data-table__cell--non-numeric">Cliente</th>
       						<th class="mdl-data-table__cell--non-numeric">CPF</th>
       						<th class="mdl-data-table__cell--non-numeric">Fila</th>
+      						<th class="mdl-data-table__cell--non-numeric">Prioridade</th>
       						<th>Horário de entrada</th>
     					</tr>
   					</thead>
@@ -114,7 +149,13 @@
   							<td class="mdl-data-table__cell--non-numeric">${cliente.nome }</td>
   							<td class="mdl-data-table__cell--non-numeric">${cliente.cpf }</td>
   							<td class="mdl-data-table__cell--non-numeric">${cliente.fila.descricao }</td>
-  							<td>${cliente.horarioDeEntrada }</td>
+  							<c:if test="${cliente.fila.prioritario == true }">
+  							<td class="mdl-data-table__cell--non-numeric">Sim</td>
+  							</c:if>
+  							<c:if test="${cliente.fila.prioritario == false}">
+  							<td class="mdl-data-table__cell--non-numeric">Não</td>
+  							</c:if>
+  							<td>${cliente.horarioDeEntrada.hours}:${cliente.horarioDeEntrada.minutes}:${cliente.horarioDeEntrada.seconds}</td>
   						</tr>
   						</c:forEach>
   					</tbody>
@@ -131,6 +172,7 @@
       						<th class="mdl-data-table__cell--non-numeric">Cliente</th>
       						<th class="mdl-data-table__cell--non-numeric">CPF</th>
       						<th class="mdl-data-table__cell--non-numeric">Fila</th>
+      						<th class="mdl-data-table__cell--non-numeric">Prioridade</th>
       						<th>Horário de atendimento</th>
     					</tr>
   					</thead>
@@ -140,7 +182,13 @@
   							<td class="mdl-data-table__cell--non-numeric">${cliente.nome }</td>
   							<td class="mdl-data-table__cell--non-numeric">${cliente.cpf }</td>
   							<td class="mdl-data-table__cell--non-numeric">${cliente.fila.descricao }</td>
-  							<td>${cliente.horarioDeAtendimento }</td>
+  							<c:if test="${cliente.fila.prioritario == true }">
+  							<td class="mdl-data-table__cell--non-numeric">Sim</td>
+  							</c:if>
+  							<c:if test="${cliente.fila.prioritario == false}">
+  							<td class="mdl-data-table__cell--non-numeric">Não</td>
+  							</c:if>
+  							<td>${cliente.horarioDeAtendimento.hours}:${cliente.horarioDeAtendimento.minutes}:${cliente.horarioDeAtendimento.seconds}</td>
   						</tr>
   						</c:forEach>
   					</tbody>
@@ -181,7 +229,7 @@
 				<br>
 				<select name="idFila">
 					<c:forEach var="fila" items="${filas}">
-						<option id="${fila}" value="${fila.id}">${fila.descricao}</option>
+						<option id="${fila}" value="${fila.id}">${fila}</option>
 					</c:forEach>
 				</select>
 				<br><br>

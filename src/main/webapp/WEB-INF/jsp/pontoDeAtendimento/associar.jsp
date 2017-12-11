@@ -11,6 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>FilaFácil</title>
     
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Material Design Lite">
@@ -54,20 +58,20 @@
       		</div>
       	</header>
       	<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-      		<a class="mdl-navigation__link" href="${linkTo[UnidadeController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Unidades</a>
+      		<a class="mdl-navigation__link" href="${linkTo[UnidadeController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">business</i>Unidades</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Ponto de Atendimento</a>
+      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">location_on</i>Pontos de Atendimento</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[FilaController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Fila</a>
+      		<a class="mdl-navigation__link" href="${linkTo[FilaController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">linear_scale</i>Filas</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[FuncionarioController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Funcionarios</a>
+      		<a class="mdl-navigation__link" href="${linkTo[FuncionarioController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Funcionarios</a>
+      		      	
+      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings_ethernet</i>Associar Ponto a Unidade</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Ponto a Unidade</a>
+      		<a class="mdl-navigation__link" href="${linkTo[FilaController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings_ethernet</i>Associar Fila a Ponto</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[FilaController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Fila a Ponto</a>
-      	
-      		<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Funcionario a Ponto</a>
-      	</nav>
+      		
+      		<a class="mdl-navigation__link" href="${linkTo[EmpresaController].telaConfiguracao}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">brightness_high</i>Configurações</a></nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
       	<c:if test="${mensagem != null }">
@@ -77,19 +81,20 @@
 		</c:if>
 		<br>
 		<form action="<c:url value="/ponto/associar"/>" method="post">
+			<label>Ponto de Atendimento</label><br/>
 			<select name="idPonto">
 				<c:forEach var="ponto" items="${pontos}">
 					<option id="${ponto}" value="${ponto.id}">${ponto.nome}</option>
 				</c:forEach>
-			</select>
-			
+			</select><br/>
+			<label>Unidade</label><br/>
 			<select name="idUnidade">
 				<c:forEach var="unidade" items="${unidades}">
 					<option id="${unidade}" value="${unidade.id}">${unidade.nome}</option>
 				</c:forEach>
 			</select>
-			
-			<button type="submit">Associar</button>
+			<br/><br/><br/>
+			<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Associar</button>
 		</form>
 		
       </main>

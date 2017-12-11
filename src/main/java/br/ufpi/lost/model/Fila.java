@@ -39,6 +39,9 @@ public class Fila implements PersistenceEntity {
 	
 	@OneToMany(mappedBy="fila", targetEntity=Cliente.class,fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Cliente> clientes = new ArrayList<>();
+	
+	
+	private boolean prioritario = false;
 	/**
 	 * Retorna o id da fila.
 	 */
@@ -106,5 +109,22 @@ public class Fila implements PersistenceEntity {
 	 */
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
+	}
+	public boolean isPrioritario() {
+		return prioritario;
+	}
+	public void setPrioritario(boolean prioritario) {
+		this.prioritario = prioritario;
+	}
+	
+	@Override
+	public String toString() {
+		String resp = this.descricao;
+		
+		if(prioritario) {
+			resp = resp + " - Prioritária";
+		}
+		
+		return resp;
 	}
 }

@@ -36,9 +36,6 @@ public class PontoDeAtendimento implements PersistenceEntity {
 	@JoinColumn(name = "id_unidade")
 	private Unidade unidade;
 	
-	@ManyToMany(mappedBy="pontos")
-	private List<Painel> paineis = new ArrayList<Painel>();
-	
 	@ManyToOne
 	@JoinColumn(name = "id_empresa")
 	private Empresa empresa;
@@ -113,17 +110,4 @@ public class PontoDeAtendimento implements PersistenceEntity {
 		this.empresa = empresa;
 	}
 
-	/**
-	 * @return the paineis
-	 */
-	public List<Painel> getPaineis() {
-		return paineis;
-	}
-
-	/**
-	 * @param paineis the paineis to set
-	 */
-	public void setPaineis(List<Painel> paineis) {
-		this.paineis = paineis;
-	}
 }

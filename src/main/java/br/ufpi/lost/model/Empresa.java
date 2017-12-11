@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import br.ufpi.lost.dao.PersistenceEntity;
+import br.ufpi.lost.model.enums.TipoPrioridade;
 
 @Entity
 public class Empresa implements PersistenceEntity {
@@ -37,6 +40,10 @@ public class Empresa implements PersistenceEntity {
 	/**
 	 * Retorna o id da empresa.
 	 */
+	
+	@Enumerated(EnumType.STRING)
+	private TipoPrioridade tipoPrioridade = TipoPrioridade.PRIORITARIO;
+	
 	public Long getId() {
 		return id;
 	}
@@ -115,5 +122,17 @@ public class Empresa implements PersistenceEntity {
 	 */
 	public void setUnidades(List<Unidade> unidades) {
 		this.unidades = unidades;
+	}
+	/**
+	 * @return the tipoPrioridade
+	 */
+	public TipoPrioridade getTipoPrioridade() {
+		return tipoPrioridade;
+	}
+	/**
+	 * @param tipoPrioridade the tipoPrioridade to set
+	 */
+	public void setTipoPrioridade(TipoPrioridade tipoPrioridade) {
+		this.tipoPrioridade = tipoPrioridade;
 	}
 }

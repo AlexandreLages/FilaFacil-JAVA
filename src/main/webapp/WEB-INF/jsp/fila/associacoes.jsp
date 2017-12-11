@@ -54,20 +54,20 @@
       		</div>
       	</header>
       	<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-      		<a class="mdl-navigation__link" href="${linkTo[UnidadeController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Unidades</a>
+      		<a class="mdl-navigation__link" href="${linkTo[UnidadeController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">business</i>Unidades</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Ponto de Atendimento</a>
+      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">location_on</i>Pontos de Atendimento</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[FilaController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Fila</a>
+      		<a class="mdl-navigation__link" href="${linkTo[FilaController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">linear_scale</i>Filas</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[FuncionarioController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Funcionarios</a>
+      		<a class="mdl-navigation__link" href="${linkTo[FuncionarioController].telaInicial}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Funcionarios</a>
+      		      	
+      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings_ethernet</i>Associar Ponto a Unidade</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[PontoDeAtendimentoController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Ponto a Unidade</a>
+      		<a class="mdl-navigation__link" href="${linkTo[FilaController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">settings_ethernet</i>Associar Fila a Ponto</a>
       	
-      		<a class="mdl-navigation__link" href="${linkTo[FilaController].associacoes}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Fila a Ponto</a>
-      	
-      		<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Associar Funcionario a Ponto</a>
-      	</nav>
+      		
+      		<a class="mdl-navigation__link" href="${linkTo[EmpresaController].telaConfiguracao}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">brightness_high</i>Configurações</a></nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
       	<c:if test="${mensagem != null }">
@@ -80,6 +80,7 @@
 			<thead>
     			<tr>
       				<th class="mdl-data-table__cell--non-numeric">Fila</th>
+      				<th class="mdl-data-table__cell--non-numeric">Prioritário</th>
       				<th class="mdl-data-table__cell--non-numeric">Ponto de Atendimento</th>
     			</tr>
   			</thead>
@@ -88,6 +89,12 @@
   					<c:forEach items="${fila.pontosDeAtendimento}" var="ponto" varStatus="status">
   					<tr>
   						<td class="mdl-data-table__cell--non-numeric">${fila.descricao }</td>
+  						<c:if test="${fila.prioritario == true}">
+  						<td class="mdl-data-table__cell--non-numeric">Sim</td>
+  						</c:if>
+  						<c:if test="${fila.prioritario == false}">
+  						<td class="mdl-data-table__cell--non-numeric">Não</td>
+  						</c:if>
   						<td class="mdl-data-table__cell--non-numeric">${ponto.nome }</td>
   					</tr>
   					</c:forEach>
